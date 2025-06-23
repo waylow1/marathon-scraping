@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from scraper import PhotoScraper
+from src.scraper import PhotoScraper
 
 class App:
     def __init__(self, root):
