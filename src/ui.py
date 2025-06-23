@@ -34,5 +34,7 @@ class App:
             messagebox.showinfo("Aucun résultat", "Aucune image trouvée.")
             return
 
-        scraper.download_images(img_links)
+        images = scraper.download_images(img_links)
         messagebox.showinfo("Succès", f"Téléchargement terminé. {len(img_links)} images enregistrées.")
+
+        scraper.remove_watermark_with_browser(images, "./output_no_watermark")
