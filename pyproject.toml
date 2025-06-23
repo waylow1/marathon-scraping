@@ -9,5 +9,7 @@ dependencies = [
     "lxml>=5.4.0",
     "patchright>=1.52.5",
     "playwright>=1.52.0",
+    "playwright-stealth<2.0.0",
     "requests>=2.32.4",
+    "setuptools<81",
 ]

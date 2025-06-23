@@ -9,3 +9,5 @@ wheels/
 # Virtual environments
 .venv
 userdata/
+output/
+output_no_watermark/
