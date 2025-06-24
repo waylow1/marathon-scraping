@@ -77,8 +77,12 @@ class PhotoScraper:
             print(f"Erreur lors de l'upload de l'image : {e}")
      
     def download_processed_image(self, page, output_dir, original_image_path):
-        page.wait_for_selector('img[data-testid="pixelbin-image"]', timeout=15000)
-        img_elems = page.query_selector_all('img[data-testid="pixelbin-image"]')
+        try:
+            page.wait_for_selector('img[data-testid="pixelbin-image"]', timeout=15000)
+            img_elems = page.query_selector_all('img[data-testid="pixelbin-image"]')
+        except Exception as e:
+            print(f"Erreur lors de la récupération de l'image traitée : {e}")
+            return
 
         img_elem = img_elems[-1]
     

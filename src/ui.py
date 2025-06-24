@@ -20,23 +20,21 @@ class App:
         start_button.grid(row=2, column=0, columnspan=2, pady=15)
 
     def start_scraping(self):
-        # event_id = self.event_id_entry.get()
-        # tag = self.tag_entry.get()
+        event_id = self.event_id_entry.get()
+        tag = self.tag_entry.get()
 
-        # if not event_id or not tag:
-        #     messagebox.showerror("Erreur", "Veuillez entrer l'Event ID et le numéro de dossard.")
-        #     return
+        if not event_id or not tag:
+            messagebox.showerror("Erreur", "Veuillez entrer l'Event ID et le numéro de dossard.")
+            return
 
-        scraper = PhotoScraper(222, 560)
-        # img_links = scraper.scrape_images()
+        scraper = PhotoScraper(event_id, tag)
+        img_links = scraper.scrape_images()
 
-        # if not img_links:
-        #     messagebox.showinfo("Aucun résultat", "Aucune image trouvée.")
-        #     return
+        if not img_links:
+            messagebox.showinfo("Aucun résultat", "Aucune image trouvée.")
+            return
 
-        # #images = scraper.download_images(img_links)
-        # messagebox.showinfo("Succès", f"Téléchargement terminé. {len(img_links)} images enregistrées.")
-
-        images = ["output/1.jpg", "output/2.jpg","output/3.jpg"]  # Placeholder for downloaded images
+        images = scraper.download_images(img_links)
+        messagebox.showinfo("Succès", f"Téléchargement terminé. {len(img_links)} images enregistrées.")
 
         scraper.remove_watermark_with_browser(images, "./output_no_watermark")
