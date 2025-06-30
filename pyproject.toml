@@ -10,6 +10,8 @@ dependencies = [
     "patchright>=1.52.5",
     "playwright>=1.52.0",
     "playwright-stealth<2.0.0",
+    "redis>=6.2.0",
     "requests>=2.32.4",
+    "rq>=2.4.0",
     "setuptools<81",
 ]

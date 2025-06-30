@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  rq-dashboard:
+    image: python:3.9
+    working_dir: /app
+    command: >
+      /bin/bash -c "pip install rq-dashboard && rq-dashboard"
+    ports:
+      - "9181:9181"
+    environment:
+      - RQ_DASHBOARD_REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis

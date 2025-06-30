@@ -1,11 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
-from src.scraper import PhotoScraper
+from src.services.scraper import PhotoScraper
+from src.services.rq_service import RQService
 
 class App:
     def __init__(self, root):
         self.root = root
         self.root.title("Téléchargeur de photos - PhotoRunning")
+        self.rq_service = RQService()
+        self.rq_service.set_queue("remove-watermark")
 
         tk.Label(root, text="Event ID:").grid(row=0, column=0, padx=10, pady=5, sticky='e')
         self.event_id_entry = tk.Entry(root)
@@ -35,6 +38,10 @@ class App:
             return
 
         images = scraper.download_images(img_links)
-        messagebox.showinfo("Succès", f"Téléchargement terminé. {len(img_links)} images enregistrées.")
 
-        scraper.remove_watermark_with_browser(images, "./output_no_watermark")
+        self.rq_service.set_queue(tag)
+        
+        for img in images:
+            self.rq_service.enqueue_jobs(img, None, retry=10)
+
+        print(f"Enqueued {len(images)} jobs for processing.")
