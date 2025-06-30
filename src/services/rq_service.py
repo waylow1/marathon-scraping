@@ -22,7 +22,7 @@ class RQService:
             job_timeout=-1,
             result_ttl=-1,
             failure_ttl=-1,
-            retry=Retry(max=2),
+            retry=Retry(max=10),
         )
 
 

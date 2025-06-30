@@ -42,6 +42,6 @@ class App:
         self.rq_service.set_queue(tag)
         
         for img in images:
-            self.rq_service.enqueue_jobs(img, None, retry=10)
+            self.rq_service.enqueue_jobs(img, tag)
 
         print(f"Enqueued {len(images)} jobs for processing.")
