@@ -11,3 +11,5 @@ wheels/
 userdata/
 output/
 output_no_watermark/
+.env
+output_no_watermark*
